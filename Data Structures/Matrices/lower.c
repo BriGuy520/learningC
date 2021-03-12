@@ -10,7 +10,7 @@ void Set(struct Arrays *arr, int i, int j, int x){
 
   if(i >= j){
     arr->A[i * (i - 1) / 2 + j - 1] = x;
-  }
+  } 
 } 
 
 void Display(struct Arrays arr){
