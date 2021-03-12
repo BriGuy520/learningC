@@ -8,10 +8,10 @@ struct Arrays {
 
 void Set(struct Arrays *arr, int i, int j, int x){
 
-  if(i >= j){
-    arr->A[i - j] = x;
-  } else {
-    arr->A[j - i + arr->n] = x;
+  if(j >= i && i == 1){
+    arr->A[j - i] = x;
+  } else if (j < i && j == 1){
+    arr->A[i - j + arr->n - 1] = x;
   } 
 
 }
@@ -21,11 +21,11 @@ void Display(struct Arrays arr){
   int i, j;
 
   for(i = 1; i <= arr.n;i++){
-    for(j = 1; i <= arr.n; j++){
-      if(i >= j){
-        printf("%d ", arr.A[i - j]);
+    for(j = 1; j <= arr.n; j++){
+      if(j >= i){
+        printf("%d ", arr.A[j - i]);
       } else {
-        printf("%d ", arr.A[j - i + arr.n]);
+        printf("%d ", arr.A[i - j + arr.n - 1]);
       }
     }
     printf("\n");
