@@ -19,7 +19,7 @@ void Create(struct Sparse *s){
 
   int i;
 
-  printf("Enter Dimensions: ");
+  printf("Enter Dimensions rows x column: ");
   scanf("%d %d", &s->row, &s->column);
 
   printf("Enter Number of Elements: ");
@@ -37,8 +37,8 @@ void Display(struct Sparse arr){
 
   int i, j, k = 0;
 
-  for(i = 0; i < arr.column; i++){
-    for(j = 0; j < arr.row; j++){
+  for(i = 0; i < arr.row; i++){
+    for(j = 0; j < arr.column; j++){
       if(i == arr.e[k].i && j == arr.e[k].j){
         printf("%d ", arr.e[k++].x);
       } else {
