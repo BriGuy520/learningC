@@ -1,41 +1,63 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(){
 
-  int i, j, size; 
+struct Element {
+  int i;
+  int j;
+  int x;
+};
 
-  int k = 0;
+struct Sparse {
+  struct Element *e;
+  int size;
+  int row;
+  int column; 
+};
 
-  int sparse[4][5] = {{0, 0, 3, 0, 0}, {0, 0, 0, 0, 2}, {0, 4, 0, 0, 0}, {0, 0, 0, 0, 0}};
+void Create(struct Sparse *s){
 
-  for(i = 0; i < 4; i++){
-    for(j = 0; j < 5; j++){
-      if(sparse[i][j] != 0){
-        size++;
-      }
-    }
+  int i;
+
+  printf("Enter Dimensions: ");
+  scanf("%d %d", &s->row, &s->column);
+
+  printf("Enter Number of Elements: ");
+  scanf("%d", &s->size);
+  s->e = (struct Element *) malloc(s->size * sizeof(struct Element));
+  printf("Size of e: %d\n", s->size * sizeof(struct Element));
+
+  for(i = 0; i < s->size;i++){
+    printf("Add Row Column Value:\n");
+    scanf("%d %d %d", &s->e[i].i, &s->e[i].j, &s->e[i].x);
   }
+}
 
-  int matrixValues[3][size];
+void Display(struct Sparse arr){
 
-  for(i = 0; i < 4; i++){
-    for(j = 0; j < 5; j++){
+  int i, j, k = 0;
 
-      if(sparse[i][j] != 0){
-        matrixValues[0][k] = i;
-        matrixValues[1][k] = j;
-        matrixValues[2][k] = sparse[i][j];
-        k++;
+  for(i = 0; i < arr.column; i++){
+    for(j = 0; j < arr.row; j++){
+      if(i == arr.e[k].i && j == arr.e[k].j){
+        printf("%d ", arr.e[k++].x);
+      } else {
+        printf("0 ");
       }
-    }
-  }
-
-  for(i = 0; i < 3; i++){
-    for(j = 0; j < size; j++){
-      printf("%d ", matrixValues[i][j]);
     }
     printf("\n");
   }
+}
+
+
+int main(){
+
+  struct Sparse s; 
+  int i, j;
+
+  Create(&s);
+  printf("\n\n");
+  Display(s);
+
 
 }
