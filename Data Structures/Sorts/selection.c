@@ -9,6 +9,13 @@ int main(){
   int size = sizeof(arr) / sizeof(arr[0]);
   int current = 0;
   int minIdx;
+
+  printf("Before sort:\n");
+  for(i = 0; i < size; i++){
+    printf("%d ", arr[i]);
+  }
+
+  printf("\n\n");
  
   for(i = 0; i < size - 1; i++){
     minIdx = i;
@@ -18,8 +25,8 @@ int main(){
       }
     }
     temp = arr[i];
-    arr[minIdx] = arr[i];
-    arr[i] = temp;   
+    arr[i] = arr[minIdx];
+    arr[minIdx] = temp;   
   }
 
   for(i = 0; i < size; i++){
