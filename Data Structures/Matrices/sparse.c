@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 struct Element {
   int i;
   int j;
@@ -9,38 +8,39 @@ struct Element {
 };
 
 struct Sparse {
-  struct Element *e;
-  int size;
+  struct Element *E;
   int row;
-  int column; 
+  int column;
+  int size;
 };
 
-void Create(struct Sparse *s){
+void Create(struct Sparse *arr){  
 
   int i;
 
-  printf("Enter Dimensions rows x column: ");
-  scanf("%d %d", &s->row, &s->column);
+  printf("Enter column and row length: ");
+  scanf("%d %d", &arr->column, &arr->row);
+  printf("\nEnter number of values in matrix: ");
+  scanf("%d", &arr->size);
 
-  printf("Enter Number of Elements: ");
-  scanf("%d", &s->size);
-  s->e = (struct Element *) malloc(s->size * sizeof(struct Element));
-  printf("Size of e: %d\n", s->size * sizeof(struct Element));
+  arr->E = (struct Element *) malloc(arr->size * sizeof(struct Element));
 
-  for(i = 0; i < s->size;i++){
-    printf("Add Row Column Value:\n");
-    scanf("%d %d %d", &s->e[i].i, &s->e[i].j, &s->e[i].x);
+  for(i = 0; i < arr->size; i++){
+    
+    printf("Enter row index, column index, value\n");
+    scanf("%d %d %d", &arr->E[i].i, &arr->E[i].j, &arr->E[i].x);
   }
-}
+
+  printf("\n\n");
+} 
 
 void Display(struct Sparse arr){
-
   int i, j, k = 0;
 
   for(i = 0; i < arr.row; i++){
     for(j = 0; j < arr.column; j++){
-      if(i == arr.e[k].i && j == arr.e[k].j){
-        printf("%d ", arr.e[k++].x);
+      if(arr.E[k].i == i && arr.E[k].j == j){
+        printf("%d ", arr.E[k++].x); 
       } else {
         printf("0 ");
       }
@@ -52,12 +52,9 @@ void Display(struct Sparse arr){
 
 int main(){
 
-  struct Sparse s; 
-  int i, j;
+  struct Sparse s;
 
   Create(&s);
-  printf("\n\n");
   Display(s);
-
 
 }
