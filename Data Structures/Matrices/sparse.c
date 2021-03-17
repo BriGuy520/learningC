@@ -34,6 +34,15 @@ void Create(struct Sparse *arr){
   printf("\n\n");
 } 
 
+void Add(struct Sparse s1, struct Sparse s2){
+
+  struct Sparse s3;
+  int arrSize = s1.size + s2.size;
+  s3.E = (struct Element *) malloc(arrSize * sizeof(struct Element));
+  int i; 
+
+}
+
 void Display(struct Sparse arr){
   int i, j, k = 0;
 
@@ -53,8 +62,10 @@ void Display(struct Sparse arr){
 int main(){
 
   struct Sparse s;
+  struct Sparse s2;
 
   Create(&s);
+  Create(&s2);
   Display(s);
 
 }
