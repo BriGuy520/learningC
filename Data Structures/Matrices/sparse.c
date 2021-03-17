@@ -34,33 +34,33 @@ void Create(struct Sparse *arr){
   printf("\n\n");
 } 
 
-void Add(struct Sparse *s1, struct Sparse *s2){
+struct Sparse *Add(struct Sparse *s1, struct Sparse *s2){
 
   int i = 0, j = 0, k = 0;
 
   if(s1->column != s2->column && s1->row != s2->row)
     return 0;
 
-  struct Sparse s3;
-  s3.size = s1->size + s2->size;
+  struct Sparse *s3;
+  s3->size = s1->size + s2->size;
 
-  s3.column = s1->column;
-  s3.row = s1->row;
-  s3.E = (struct Element *) malloc(s3.size * sizeof(struct Element)); 
+  s3->column = s1->column;
+  s3->row = s1->row;
+  s3->E = (struct Element *) malloc(s3->size * sizeof(struct Element)); 
 
   while(i < s1->size && j < s2->size){
 
     if(s1->E[i].i < s2->E[j].i){
-      s3.E[k++] = s1->E[i++];
+      s3->E[k++] = s1->E[i++];
     } else if(s1->E[i].i > s2->E[j].i){
-      s3.E[k++] = s2->E[j++];
+      s3->E[k++] = s2->E[j++];
     } else {
       if(s1->E[i].j < s2->E[j].j){
-        s3.E[k++] = s1->E[i++];
+        s3->E[k++] = s1->E[i++];
       } else if(s1->E[i].j > s1->E[j].j){
-        s3.E[k++] = s2->E[j++];
+        s3->E[k++] = s2->E[j++];
       } else {
-        s3.E[k++].x = s1->E[i++].x + s2->E[j++].x;
+        s3->E[k++].x = s1->E[i++].x + s2->E[j++].x;
       }
     }
   } 
@@ -86,11 +86,13 @@ int main(){
 
   struct Sparse s;
   struct Sparse s2;
+  struct Sparse *s3;
 
   Create(&s);
   Create(&s2);
   Display(s);
 
-  Add(&s, &s2);
+  s3 = Add(&s, &s2);
+  Display(*s3);
 
 }
