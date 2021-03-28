@@ -17,8 +17,32 @@ struct Stack *createStack(unsigned cap){
   return create;
 }
 
+
+int isFull(struct Stack *stack){
+
+  return stack->top == stack->limit - 1;
+}
+
+int isEmpty(struct Stack *stack){
+
+  return stack->top == -1;
+}
+
+
+void push(struct Stack *stack, int x){
+
+  if(isFull(stack))
+    return;
+  stack->array[++stack->top] = x;
+  printf("%d pushed to stack\n", x);
+}
+
 int main(){
 
   struct Stack *stack = createStack(100);
+
+  push(stack, 29);
+  push(stack, 45);
+  push(stack, 54);
 
 }
