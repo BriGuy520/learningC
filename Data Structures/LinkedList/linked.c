@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 
 struct Node {
   int data;
@@ -8,12 +8,24 @@ struct Node {
 };
 
 struct Node *head = NULL;
+struct Node *current = NULL;
 
-void Insert(int data){
+int Length(){
+
+  int count = 0;
+  
+  for(current = head; current != NULL; current = current->next){
+    count++;
+  }
+
+  return count;
+}
+
+void *Insert(int x){
 
   struct Node *link = (struct Node *) malloc(sizeof(struct Node));
 
-  link->data = data;
+  link->data = x;
   link->next = head;
 
   head = link;
@@ -21,103 +33,74 @@ void Insert(int data){
 }
 
 struct Node *Delete(int x){
-  
+
   struct Node *current = head;
-  struct Node *previous = NULL;
+  struct Node *previous;
+
 
   while(current->data != x){
-    if(current->next != NULL){
+    if(current->next == NULL){
+      return NULL;
+    } else {
       previous = current;
       current = current->next;
-    } else {
-      return NULL;
     }
   }
 
-  if(current == head){
-    head = head->next;
-  } else {
-    previous->next = current->next; 
-  }
+  previous->next = current->next;
 
-  return current;
-}
+  return previous;
 
-int Length(){
-
-  struct Node *list;
-  int count = 0;
-
-  if(head == NULL){
-    return count;
-  }
-
-  for(list = head; list != NULL; list = list->next){
-    count++;
-  }
-
-  return count;
 }
 
 void Sort(){
 
   int i, j, k, tempData;
-  struct Node *list;
-  struct Node *next;
   int size = Length();
   k = size;
 
-  for(i= 0; i < size - 1;i++, k--){
-    list = head;
-    next = head->next;
-    
-    for(j = 1; j < k; j++){
-      if(list->data > next->data){
-        tempData = list->data;
-        list->data = next->data;
-        next->data = tempData;
-      } 
-        list = list->next;
-        next = next->next;
-    }
+  struct Node *current = head;
+  struct Node *next = head->next;
+
+  for(i = 0; i < size - 1; i++){
+
+      for(j = 0; j < k; j++){
+        if(current->data > next->data){
+
+        }
+      
+      }
   }
+
 
 
 }
 
-void Print(){
-  
-  struct Node *link = head;
 
-  while(link != NULL){
-    printf("%d -> ", link->data);
-    link = link->next;
+
+void Print(){
+
+  struct Node *current = head;
+
+  while(current != NULL){
+    printf("%d -> ", current->data);
+    current = current->next;
   }
-  printf("\n");
 }
 
 int main(){
 
-
   Insert(11);
+  Insert(12);
   Insert(13);
-  Insert(14);
 
-  Print();
+  printf("Length of list is %d\n", Length());
 
-  Insert(15);
+  Insert(45);
+  Insert(23);
   Insert(19);
 
-  Sort();
+  Delete(23);
 
   Print();
-
-  Delete(15);
-  Delete(13);
-
-  Print();
-
-
-  return 0;
-  
-}
+} 
