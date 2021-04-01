@@ -64,16 +64,20 @@ void Sort(){
 
   for(i = 0; i < size - 1; i++){
 
-      for(j = 0; j < k; j++){
-        if(current->data > next->data){
+    current = head;
+    next = head->next;
 
-        }
-      
+    for(j = 0; j < k; j++){
+      if(current->data > next->data){
+        tempData = current->data;
+        current->data = next->data;
+        next->data = tempData;
+      } else {
+        current = current->next;
+        next = next->next;
       }
+    }
   }
-
-
-
 }
 
 
@@ -86,6 +90,8 @@ void Print(){
     printf("%d -> ", current->data);
     current = current->next;
   }
+
+  printf("\n");
 }
 
 int main(){
@@ -101,6 +107,12 @@ int main(){
   Insert(19);
 
   Delete(23);
+  Delete(12);
+
+  Print();
+
+  printf("Sorted linked list: ");
+  Sort();
 
   Print();
 } 
