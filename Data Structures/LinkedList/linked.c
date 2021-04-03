@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 struct Node {
   int data;
@@ -9,6 +10,11 @@ struct Node {
 
 struct Node *head = NULL;
 struct Node *current = NULL;
+
+
+bool isEmpty(){
+  return head == NULL;
+}
 
 int Length(){
 
@@ -21,7 +27,7 @@ int Length(){
   return count;
 }
 
-void *Insert(int x){
+void Insert(int x){
 
   struct Node *link = (struct Node *) malloc(sizeof(struct Node));
 
@@ -53,38 +59,60 @@ struct Node *Delete(int x){
 
 }
 
+int Sum(){
+
+  struct Node *list = head;
+  int sum = 0;
+
+  while(list != NULL){
+    sum += list->data;
+    list = list->next;
+  }
+
+  return sum;
+}
+
 void Sort(){
 
   int i, j, k, tempData;
   int size = Length();
   k = size;
 
-  struct Node *current = head;
-  struct Node *next = head->next;
+  struct Node *current;
+  struct Node *next;
 
-  for(i = 0; i < size - 1; i++){
+  for(i = 0; i < size - 1; i++, k--){
 
     current = head;
     next = head->next;
+    printf("Value of k outside inner for loop: %d\n", k);
 
-    for(j = 0; j < k; j++){
+    for(j = 1; j < k; j++){
+      printf("Value of k inside inner for loop: %d\n", k);
+
       if(current->data > next->data){
         tempData = current->data;
         current->data = next->data;
         next->data = tempData;
-      } else {
-        current = current->next;
-        next = next->next;
-      }
+      } 
+
+      current = current->next;
+      next = next->next;
     }
   }
 }
 
 
 
+
+
 void Print(){
 
   struct Node *current = head;
+
+  if(current == NULL){
+    printf("list is empty"); 
+  }
 
   while(current != NULL){
     printf("%d -> ", current->data);
@@ -96,6 +124,8 @@ void Print(){
 
 int main(){
 
+  printf("value of empty %d\n", isEmpty());
+
   Insert(11);
   Insert(12);
   Insert(13);
@@ -103,11 +133,6 @@ int main(){
   printf("Length of list is %d\n", Length());
 
   Insert(45);
-  Insert(23);
-  Insert(19);
-
-  Delete(23);
-  Delete(12);
 
   Print();
 
@@ -115,4 +140,9 @@ int main(){
   Sort();
 
   Print();
+
+  printf("value of empty %d\n", isEmpty());
+
+  printf("Sum of list is %d\n", Sum());
+
 } 
