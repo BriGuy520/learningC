@@ -72,39 +72,21 @@ int Sum(){
   return sum;
 }
 
-void Sort(){
+int Max(){
 
-  int i, j, k, tempData;
-  int size = Length();
-  k = size;
+  struct Node *list = head;
+  int max = 0;
 
-  struct Node *current;
-  struct Node *next;
-
-  for(i = 0; i < size - 1; i++, k--){
-
-    current = head;
-    next = head->next;
-    printf("Value of k outside inner for loop: %d\n", k);
-
-    for(j = 1; j < k; j++){
-      printf("Value of k inside inner for loop: %d\n", k);
-
-      if(current->data > next->data){
-        tempData = current->data;
-        current->data = next->data;
-        next->data = tempData;
-      } 
-
-      current = current->next;
-      next = next->next;
+  while(list != NULL){
+    if(list->data > max){
+      max = list->data;
     }
+
+    list = list->next;
   }
+
+  return max;
 }
-
-
-
-
 
 void Print(){
 
@@ -144,5 +126,7 @@ int main(){
   printf("value of empty %d\n", isEmpty());
 
   printf("Sum of list is %d\n", Sum());
+
+  printf("Max value in list is %d\n", Max());
 
 } 
