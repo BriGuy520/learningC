@@ -38,6 +38,8 @@ void Insert(int x){
 
 }
 
+// hello
+
 struct Node *Delete(int x){
 
   struct Node *current = head;
