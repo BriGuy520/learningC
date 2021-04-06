@@ -88,6 +88,33 @@ int Max(){
   return max;
 }
 
+void Sort(){
+
+  int i, j, k, tempData;
+  int size = Length();
+  k = size;
+  
+  struct Node *current;
+  struct Node *next;
+
+  for(i = 0; i < size; i++, k--){
+
+    current = head;
+    next = head->next;
+
+    for(j = 1; j < k; j++){
+      if(current->data > next->data){
+        tempData = current->data;
+        current->data = next->data;
+        next->data = tempData;
+      }
+
+      current = current->next;
+      next = next->next;
+    }
+  }
+}
+
 void Print(){
 
   struct Node *current = head;
@@ -106,7 +133,11 @@ void Print(){
 
 int main(){
 
-  printf("value of empty %d\n", isEmpty());
+  if(isEmpty() == 0){
+    printf("The list is not empty\n");
+  } else {
+    printf("The list is empty\n");
+  }
 
   Insert(11);
   Insert(12);
@@ -123,7 +154,11 @@ int main(){
 
   Print();
 
-  printf("value of empty %d\n", isEmpty());
+  if(isEmpty() == 0){
+    printf("The list is not empty\n");
+  } else {
+    printf("The list is empty\n");
+  }
 
   printf("Sum of list is %d\n", Sum());
 
