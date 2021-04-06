@@ -38,15 +38,6 @@ void Insert(int x){
 
 }
 
-void Reverse(struct Node *link){
-
-  if(link != NULL){
-
-    Reverse(link->next);
-    printf("%d -> ", link->data); 
-  }
-}
-
 struct Node *Delete(int x){
 
   struct Node *current = head;
