@@ -38,6 +38,15 @@ void Insert(int x){
 
 }
 
+void Reverse(struct Node *link){
+
+  if(link != NULL){
+
+    Reverse(link->next);
+    printf("%d -> ", link->data); 
+  }
+}
+
 struct Node *Delete(int x){
 
   struct Node *current = head;
@@ -147,10 +156,8 @@ int main(){
 
   Insert(45);
 
-  Print();
-
-  printf("Sorted linked list: ");
-  Sort();
+  Insert(23);
+  Insert(32);
 
   Print();
 
@@ -163,5 +170,8 @@ int main(){
   printf("Sum of list is %d\n", Sum());
 
   printf("Max value in list is %d\n", Max());
+
+  Reverse(head);
+
 
 } 
