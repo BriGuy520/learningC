@@ -28,6 +28,10 @@ int isEmpty(struct Stack *stack){
   return stack->top == -1;
 }
 
+int pop(struct Stack *stack){
+
+  return stack->array[--stack->top];
+}
 
 void push(struct Stack *stack, int x){
 
@@ -44,5 +48,9 @@ int main(){
   push(stack, 29);
   push(stack, 45);
   push(stack, 54);
+
+  printf("%d popped form stack\n", pop(stack));
+
+  return 0;
 
 }

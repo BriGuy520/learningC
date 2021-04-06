@@ -9,6 +9,7 @@ void merging(int low, int mid, int high){
   int l1, l2, i;
 
   for(l1 = low, l2 = mid + 1, i = low; l1 <= mid && l2 <= high; i++){
+    printf("\nl1: %d, l2: %d", l1, l2);
     if(a[l1] <= a[l2])  
       b[i] = a[l1++];
     else
@@ -33,7 +34,11 @@ void sort(int low, int high){
   if(low < high){
     mid = (low + high) / 2;
     sort(low, mid);
+    printf("\nFirst:");
+    printf("\nmid: %d, low: %d, high: %d ", mid, low, high);
     sort(mid+1, high);
+    printf("\nSecond:");
+    printf("\nmid: %d, low: %d, high: %d ", mid, low, high);
     merging(low, mid, high);
   } else {
     return;
