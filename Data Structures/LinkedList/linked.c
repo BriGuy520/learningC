@@ -38,11 +38,17 @@ void Insert(int x){
 
 }
 
-<<<<<<< HEAD
-=======
-// hello
+// reverse updating comment
+void Reverse(struct Node *list){
 
->>>>>>> path
+  if(list != NULL){
+
+    Reverse(list->next);
+    printf("%d -> ", list->data);
+  }
+}
+
+
 struct Node *Delete(int x){
 
   struct Node *current = head;
