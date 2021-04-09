@@ -13,10 +13,19 @@ struct Stack *createStack(unsigned cap){
 
   create->top = -1;
   create->limit = cap;
-  create->array = (int *) malloc(cap * sizeof(int));
+  create->array = (int *) malloc(create->limit * sizeof(int));
   return create;
 }
 
+
+void displayStack(struct Stack *stack){
+
+  int i;
+
+  for(i = 0; i <= stack->top; i++){
+    printf("%d ", stack->array[i]);
+  }
+}
 
 int isFull(struct Stack *stack){
 
@@ -30,7 +39,7 @@ int isEmpty(struct Stack *stack){
 
 int pop(struct Stack *stack){
 
-  return stack->array[--stack->top];
+  return stack->array[stack->top--];
 }
 
 void push(struct Stack *stack, int x){
@@ -45,12 +54,19 @@ int main(){
 
   struct Stack *stack = createStack(100);
 
+  struct Stack *stack2 = createStack(-100);
+
+  push(stack, 10);
+
   push(stack, 29);
   push(stack, 45);
   push(stack, 54);
 
-  printf("%d popped form stack\n", pop(stack));
+  displayStack(stack);
+
+  printf("\n%d popped from stack\n", pop(stack));
+
+  displayStack(stack);
 
   return 0;
-
 }
