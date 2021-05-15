@@ -38,16 +38,14 @@ void Insert(int x){
 
 }
 
-// reverse updating comment
+// reverse
 void Reverse(struct Node *list){
 
   if(list != NULL){
-
     Reverse(list->next);
     printf("%d -> ", list->data);
   }
 }
-
 
 struct Node *Delete(int x){
 
@@ -157,7 +155,6 @@ int main(){
   printf("Length of list is %d\n", Length());
 
   Insert(45);
-
   Insert(23);
   Insert(32);
 
