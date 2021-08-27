@@ -59,7 +59,6 @@ int main(){
   struct Stack *stack2 = createStack(-100);
 
   push(stack, 10);
-
   push(stack, 29);
   push(stack, 45);
   push(stack, 54);

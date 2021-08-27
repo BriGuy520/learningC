@@ -1,35 +1,59 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define SIZE 10
 
-int main(){
+int intArray[SIZE] = {5, 3, 6, 29, 92, 18, 73, 42, 1, 2};
 
-  int i, j, temp; 
-  int arr[] = {5, 3, 2, 9, 1};
-  int size = sizeof(arr) / sizeof(arr[0]);
-  int current = 0;
-  int minIdx;
 
-  printf("Before sort:\n");
-  for(i = 0; i < size; i++){
-    printf("%d ", arr[i]);
+void printLine(int count){
+
+  for(int i = 0; i < count; i++){
+    printf("=");
   }
 
-  printf("\n\n");
- 
-  for(i = 0; i < size - 1; i++){
+  printf("\n");
+}
+
+
+void display(){
+
+  for(int i = 0; i < SIZE; i++){
+    printf("%d ", intArray[i]);
+  }
+
+  printf("\n");
+}
+
+void selectionSort(){
+
+  int i, j, minIdx;
+
+  for(i = 0; i < SIZE; i++){
+
     minIdx = i;
-    for(j = i + 1; j < size; j++){
-      if(arr[j] < arr[minIdx]){
+
+    for(j = i + 1; j < SIZE; j++){
+      if(intArray[j] < intArray[minIdx]){
         minIdx = j;
       }
     }
-    temp = arr[i];
-    arr[i] = arr[minIdx];
-    arr[minIdx] = temp;   
-  }
 
-  for(i = 0; i < size; i++){
-    printf("%d ", arr[i]);
+    if(minIdx != i){
+      int temp = intArray[i];
+      intArray[i] = intArray[minIdx];
+      intArray[minIdx] = temp;
+    }
   }
+}
+
+int main(){
+
+  printLine(50);
+  printf("Array before selection sort: ");
+  display();
+  printf("Array after selection sort: ");
+  selectionSort();
+  display();
+  printLine(50);
 }

@@ -1,19 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node {
+typedef struct DataItem {
   int data;
-  struct node *leftChild;
-  struct node *rightChild;
-};
 
-struct node *root = NULL;
+  struct DataItem *leftChild;
+  struct DataItem *rightChild;
+  
+} DataItem;
+
+DataItem *root = NULL;
 
 void insert(int data){
 
-  struct node *tempData = (struct node *) malloc(sizeof(struct node));
-  struct node *current;
-  struct node *parent;
+  DataItem *tempData = (DataItem *) malloc(sizeof(DataItem));
+  DataItem *current;
+  DataItem *parent;
 
   tempData->data = data;
   tempData->leftChild = NULL;
@@ -22,68 +24,75 @@ void insert(int data){
   if(root == NULL){
     root = tempData;
   } else {
-
     current = root;
     parent = NULL;
 
     while(1){
-
       parent = current;
 
-      if(data < parent->data){
-        current = current->leftChild;
-
-        if(current == NULL){
-          parent->leftChild = tempData;
-          return;
-        }
-      } else {
-
+      if(parent->data < data){
         current = current->rightChild;
 
         if(current == NULL){
           parent->rightChild = tempData;
-          return;
+          break;
+        }
+      } else {
+
+        current = current->leftChild;
+
+        if(current == NULL){
+          parent->leftChild = tempData;
+          break;
         }
       }
     }
   }
 }
 
-struct node *search(int data){
 
-  struct node *current = root;
-  printf("Traversing through the tree: ");
+DataItem *search(int data){
+
+  DataItem *current = root;
+
+  printf("Traversing through the Tree: ");
 
   while(current->data != data){
-    if(current != NULL){
-      printf("%d ", current->data);
-    }
 
-    if(current->data > data){
-      current = current->leftChild;
-    } else {
+    printf("%d ", current->data);
+
+    if(current->data < data){
       current = current->rightChild;
+    } else {
+      current = current->leftChild;
     }
 
     if(current == NULL){
       return NULL;
     }
-
   }
 
   return current;
-
 }
+
 
 int main(){
 
-  int i;
-  int arr[8] = {11, 43, 22, 78, 3, 29, 93, 65 };
 
-  for(i = 0; i < 8; i++){
-    insert(arr[i]);
+  insert(11);
+  insert(12);
+  insert(44);
+  insert(30);
+  insert(36);
+  insert(87);
+  insert(34);
+
+  DataItem *find = search(36);
+
+  if(find != NULL){
+    printf("\n%d was found.\n", find->data);
+  } else {
+    printf("\nItem was not found");
   }
-  
 
 }

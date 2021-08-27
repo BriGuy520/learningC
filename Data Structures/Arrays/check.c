@@ -27,5 +27,5 @@ int main(){
 
   bool result = isSorted(arr, size);
 
-  printf("This is filler.")  ;
+  printf("This is filler.");
 }

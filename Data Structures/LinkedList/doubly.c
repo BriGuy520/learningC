@@ -1,58 +1,55 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
-struct Node {
+typedef struct Node {
+
   int data;
 
   struct Node *prev;
   struct Node *next;
-};
 
-struct Node *head = NULL;
-struct Node *last = NULL;
+} Node;
 
-bool isEmpty(){
-  return head == NULL;
-}
+Node *head = NULL;
+Node *last = NULL;
 
 void printForward(){
 
-  struct Node *current = head;
+  Node *current = head;
 
   while(current != NULL){
-    printf("%d ", current->data);
+
+    printf("%d -> ", current->data);
+
     current = current->next;
   }
 
   printf("\n");
-
 }
 
 void printBackward(){
 
-  struct Node *current = last;
+  Node *current = last;
 
   while(current != NULL){
-    printf("%d ", current->data);
+
+    printf("%d -> ", current->data);
+
     current = current->prev;
   }
 
   printf("\n");
-
 }
-
 
 void insertFirst(int data){
 
-  struct Node *link = (struct Node *) malloc(sizeof(struct Node));
+  Node *link = (Node *) malloc(sizeof(Node));
 
   link->data = data;
-  link->prev = NULL;
-  link->next = NULL;
+  link->prev = link->next = NULL;
 
-  if(isEmpty()){
+  if(head == NULL){
     last = link;
   } else {
     head->prev = link;
@@ -64,66 +61,108 @@ void insertFirst(int data){
 
 void insertLast(int data){
 
-  struct Node *link = (struct Node *) malloc(sizeof(struct Node));
+  Node *link = (Node *) malloc(sizeof(Node));
 
   link->data = data;
-  link->prev = NULL;
-  link->next = NULL;
+  link->prev = link->prev = NULL;
 
-  if(isEmpty()){
+  if(last == NULL){
     last = link;
+    head = last;
   } else {
     last->next = link;
-  } 
+    link->prev = last;
+  }
 
-  link->prev = last;
   last = link;
-
 }
 
-void deleteLast(){
+bool insertAfter(int key, int item){
 
-  if(isEmpty()){
-    printf("No nodes to delete\n");
-  } else {
-    last->prev->next = NULL;
+  Node *current = head;
+
+  while(current->data != key){
+
+    if(current->next == NULL){
+      return false;
+    }
+
+    current = current->next;
   }
-}
 
-void deleteFirst(){
+  Node *newLink = (Node *) malloc(sizeof(Node));
+  
+  newLink->data = item;
+  newLink->prev = newLink->next = NULL;
 
-  if(isEmpty()){
-    printf("No nodes to delete.\n");
+  if(current == last){
+    newLink->next = NULL;
+    last = newLink;
   } else {
-    head = head->next;
-    head->prev = NULL;
+    newLink->next = current->next;
+    current->next->prev = newLink;
   }
+
+  newLink->prev = current;
+  current->next = newLink;
+  
+  return true;
+
 }
+
+Node *delete(int data){
+
+  Node *current = head;
+
+  while(current->data != data){
+
+    if(current->next == NULL){
+      return NULL;
+    }
+  }
+
+  Node *dummyData = (Node *) malloc(sizeof(Node));
+
+  if(current == head){
+
+  } else {
+
+  }
+
+  return dummyData;
+}
+
+Node *deleteLast(){
+  
+  Node *lastNode = last;
+
+  if(lastNode == NULL){
+    return NULL;
+  } else {
+    last->prev->next = NULL; 
+    last = last->prev;
+  }
+
+  return lastNode;
+
+}
+
 
 int main(){
 
+  insertLast(39);
 
   insertFirst(11);
-  insertFirst(23);
   insertFirst(54);
+  insertFirst(67);
 
-  printForward();
+  insertAfter(54, 33);
 
-  printBackward();
-
-  insertLast(87);
-  insertLast(11);
-  insertLast(82);
-
-  printForward();
-
-  printBackward();
+  insertAfter(39, 45);
 
   deleteLast();
 
   printForward();
 
-  deleteFirst();
-
-  printForward();
+  printBackward();
 }
